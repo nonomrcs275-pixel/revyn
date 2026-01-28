@@ -1,79 +1,327 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Premier Site</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-        }
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #575757;
-        }
-        main {
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Site exemple — page d'accueil présentant un petit projet personnel." />
+  <title>Mon Premier Site — Accueil</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#f4f4f9;
+      --card:#fff;
+      --primary:#2e8b57;
+      --dark:#333;
+      --muted:#666;
+      --maxw:1100px;
+      --radius:10px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link{
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip-link:focus{
+      left:10px;
+      top:10px;
+      width:auto;
+      height:auto;
+      padding:8px 12px;
+      background:#000;
+      color:#fff;
+      z-index:1000;
+    }
+
+    header{
+      background:linear-gradient(90deg,var(--primary), #3aa06d);
+      color:white;
+      padding:20px 16px;
+    }
+    .container{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:48px;
+      height:48px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.12);
+      border-radius:8px;
+      font-weight:700;
+      font-size:18px;
+      color:white;
+    }
+    header h1{font-size:1.25rem; margin:0}
+
+    /* Navigation */
+    nav{
+      background:#222;
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:8px 16px;
+      max-width:var(--maxw);
+      margin:0 auto;
+    }
+    .nav-links{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .nav-links a{
+      color:white;
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:6px;
+      font-weight:600;
+      font-size:0.95rem;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus{
+      background:rgba(255,255,255,0.06);
+      outline:none;
+    }
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:0;
+      color:white;
+      font-size:1.2rem;
+    }
+
+    main{padding:28px 0 80px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:20px;
+      align-items:start;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 6px 18px rgba(30,30,30,0.06);
+    }
+    h2{margin-top:0}
+    .hero img{max-width:100%;height:auto;border-radius:8px;display:block}
+
+    .cta{
+      display:inline-block;
+      background:var(--primary);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .cta:focus{outline:3px solid rgba(46,139,87,0.25)}
+
+    aside .muted{color:var(--muted);font-size:0.95rem}
+
+    footer{
+      margin-top:36px;
+      background:#111;
+      color:#eee;
+      padding:22px 16px;
+    }
+    footer .footer-inner{
+      max-width:var(--maxw);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+
+    /* Responsive */
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr; padding:0 12px}
+      .nav-links{display:none;flex-direction:column;width:100%}
+      .menu-toggle{display:inline-block}
+      .nav-open .nav-links{display:flex}
+    }
+    @media (prefers-reduced-motion: no-preference){
+      .card{transition:transform .18s ease, box-shadow .18s ease}
+      .card:hover{transform:translateY(-4px)}
+    }
+
+    /* Small helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:0.95rem}
+    form label{display:block;margin:8px 0 4px;font-weight:600}
+    input[type="text"], input[type="email"], textarea{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #e5e7eb;
+      font:inherit;
+    }
+    textarea{min-height:110px;resize:vertical}
+    .row{display:flex;gap:12px}
+    .row .col{flex:1}
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur mon site</h1>
-    </header>
-    <nav>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header>
+    <div class="container brand" role="banner">
+      <div class="logo" aria-hidden="true">MP</div>
+      <div>
+        <h1>Mon Premier Site</h1>
+        <div class="muted small">Apprendre, expérimenter, partager</div>
+      </div>
+    </div>
+  </header>
+
+  <nav role="navigation" aria-label="Navigation principale" id="topnav">
+    <div class="nav-inner">
+      <div class="muted small">Menu</div>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="primary-links" id="menuToggle">☰</button>
+      <div class="nav-links" id="primary-links">
         <a href="#accueil">Accueil</a>
         <a href="#apropos">À propos</a>
         <a href="#contact">Contact</a>
-    </nav>
-    <main>
-<section id="accueil">
-    <h2>Accueil</h2>
-    <p>Ceci est la page d'accueil de mon premier site</p>
-    <img src="https://via.placeholder.com/400x200" alt="Image exemple" style="max-width:100%;height:auto;">
-    <br><br>
-    <button onclick="alert('Bienvenue sur mon site !')">Clique ici !</button>
-</section>
-        <section id="apropos">
-            <h2>À propos</h2>
-            <p>Je suis en train d'apprendre à créer des sites web</p>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <div class="grid">
+      <section class="card hero" id="accueil" aria-labelledby="accueil-title">
+        <h2 id="accueil-title">Accueil</h2>
+        <p>Bienvenue sur la page d'accueil de mon premier site. Ici j'expérimente HTML, CSS et un peu de JavaScript pour rendre le site accessible et responsive.</p>
+
+        <picture>
+          <source srcset="https://via.placeholder.com/800x400" media="(min-width:600px)">
+          <img src="https://via.placeholder.com/400x200" alt="Exemple d'image : paysage stylisé" width="800" height="400">
+        </picture>
+
+        <p><button class="cta" id="welcomeBtn">Clique ici !</button></p>
+      </section>
+
+      <aside class="card" aria-labelledby="aside-title">
+        <h3 id="aside-title">À la une</h3>
+        <p class="muted small">Petits projets, notes et exemples. Cette colonne contient des informations rapides et un contact.</p>
+
+        <section id="apropos" style="margin-top:12px;">
+          <h3>À propos</h3>
+          <p>Je suis en train d'apprendre à créer des sites web et à améliorer l'accessibilité, le design et les bonnes pratiques.</p>
         </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Vous pouvez me contacter par email : nonomrcs275@example.com</p>
-        </section>
-    </main>
-    <footer>
-        &copy; 2026 Mon Premier Site
-    </footer>
+      </aside>
+
+      <section class="card" style="grid-column:1 / -1; margin-top:6px;" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p class="muted">Tu peux m'écrire directement à <strong><a href="mailto:nonomrcs275@example.com">nonomrcs275@example.com</a></strong> ou utiliser le formulaire ci-dessous (ouvre un email local).</p>
+
+        <form id="contactForm" class="small" onsubmit="return sendMail(event)" novalidate>
+          <div class="row">
+            <div class="col">
+              <label for="name">Nom</label>
+              <input id="name" name="name" type="text" required placeholder="Ton nom">
+            </div>
+            <div class="col">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="ton@email.com">
+            </div>
+          </div>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Ton message..."></textarea>
+
+          <div style="margin-top:10px;">
+            <button type="submit" class="cta">Envoyer</button>
+            <button type="reset" style="margin-left:8px;padding:10px;border-radius:8px;">Réinitialiser</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="muted small">&copy; 2026 Mon Premier Site</div>
+      <div class="muted small">Conçu pour apprendre • <a href="#contact" style="color:#bcd">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Menu toggle pour petits écrans
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('topnav');
+    toggle && toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Bouton d'accueil
+    document.getElementById('welcomeBtn')?.addEventListener('click', () => {
+      alert('Bienvenue sur mon site !');
+    });
+
+    // Fonction d'envoi basique : ouvre le client mail local avec les champs encodés.
+    function sendMail(e){
+      e.preventDefault();
+      const name = encodeURIComponent(document.getElementById('name').value.trim());
+      const email = encodeURIComponent(document.getElementById('email').value.trim());
+      const message = encodeURIComponent(document.getElementById('message').value.trim());
+      if(!name || !email || !message){
+        alert('Merci de remplir tous les champs du formulaire.');
+        return false;
+      }
+      const subject = encodeURIComponent('Message depuis le site — ' + name);
+      const body = encodeURIComponent('De: ' + name + ' <' + email + '>%0D%0A%0D%0A' + message);
+      // Ouvre le client mail local (fallback simple)
+      window.location.href = `mailto:nonomrcs275@example.com?subject=${subject}&body=${body}`;
+      return false;
+    }
+
+    // Smooth scroll pour les ancres (si support)
+    if('scrollBehavior' in document.documentElement.style){
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const targetId = a.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if(target){
+            e.preventDefault();
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+            target.focus({preventScroll:true});
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>
-
-
-
