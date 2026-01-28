@@ -3,77 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Premier Site</title>
+    <title>Mon Premier Site - Revyn</title>
     <style>
+        :root {
+            --main-color: #4CAF50;
+            --nav-bg: #222;
+            --footer-bg: #232323;
+            --container-bg: #fff;
+            --card-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            --transition: 0.3s;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
+            color: #212121;
         }
         header {
-            background-color: #4CAF50;
+            background: linear-gradient(90deg, var(--main-color) 60%, #388e3c 100%);
             color: white;
-            padding: 20px;
+            padding: 40px 20px 25px 20px;
             text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            letter-spacing: 1px;
         }
         nav {
-            background-color: #333;
+            background-color: var(--nav-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        nav ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin: 0;
         }
         nav a {
             color: white;
-            padding: 14px 20px;
-            display: inline-block;
+            padding: 16px 26px;
+            display: block;
             text-decoration: none;
+            font-size: 1.06em;
+            letter-spacing: 0.05em;
+            transition: background var(--transition), color var(--transition);
+            position: relative;
         }
-        nav a:hover {
-            background-color: #575757;
+        nav a::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background: var(--main-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            bottom: 8px;
+        }
+        nav a:hover, nav a:focus {
+            background: #575757;
+            color: #e6ffe7;
+        }
+        nav a:hover::after, nav a:focus::after {
+            opacity: 1;
         }
         main {
-            padding: 20px;
+            padding: 36px 10px 70px 10px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .container {
+            background: var(--container-bg);
+            border-radius: 16px;
+            padding: 38px 30px;
+            margin-bottom: 36px;
+            box-shadow: var(--card-shadow);
+        }
+
+        section h2 {
+            margin-top: 0;
+            color: var(--main-color);
+            font-size: 1.5em;
+        }
+        .hero-img {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+            display: block;
+            margin: 25px auto 10px auto;
+        }
+        .main-btn {
+            background: var(--main-color);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1.15em;
+            cursor: pointer;
+            margin-top: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: background var(--transition), transform var(--transition);
+        }
+        .main-btn:hover, .main-btn:focus {
+            background: #388e3c;
+            transform: scale(1.04);
+            outline: none;
+        }
+        .contact-link {
+            color: var(--main-color);
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color var(--transition);
+            word-break: break-all;
+        }
+        .contact-link:hover, .contact-link:focus {
+            color: #388e3c;
         }
         footer {
-            background-color: #333;
-            color: white;
+            background-color: var(--footer-bg);
+            color: #eee;
             text-align: center;
-            padding: 10px;
+            padding: 16px 8px 10px 8px;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 100vw;
+            font-size: 1.03em;
+            letter-spacing: 0.02em;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+        }
+        @media (max-width: 700px) {
+            header { padding: 30px 8px 18px 8px; }
+            main { padding: 28px 3px 80px 3px; }
+            .container { padding: 22px 7px; }
+            nav a { padding: 12px 9px; font-size: .99em;}
+        }
+        @media (max-width: 460px) {
+            main { padding: 4px 0 110px 0; }
+            .container { margin-bottom: 22px; }
+            nav ul { flex-direction: column; }
+            nav a { padding: 11px 8px; border-bottom: 1px solid rgba(100,100,100,0.16);}
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bienvenue sur mon site</h1>
+        <h1>Bienvenue sur Mon Premier Site <span style="font-size:.55em;color:#a5ffd2;">by Revyn</span></h1>
     </header>
     <nav>
-        <a href="#accueil">Accueil</a>
-        <a href="#apropos">À propos</a>
-        <a href="#contact">Contact</a>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#apropos">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
     <main>
-<section id="accueil">
-    <h2>Accueil</h2>
-    <p>Ceci est la page d'accueil de mon premier site</p>
-    <img src="https://via.placeholder.com/400x200" alt="Image exemple" style="max-width:100%;height:auto;">
-    <br><br>
-    <button onclick="alert('Bienvenue sur mon site !')">Clique ici !</button>
-</section>
-        <section id="apropos">
-            <h2>À propos</h2>
-            <p>Je suis en train d'apprendre à créer des sites web</p>
+        <section class="container" id="accueil">
+            <h2>Accueil</h2>
+            <p>Ceci est la page d'accueil de mon premier site web, fait avec passion&nbsp;🎉</p>
+            <img class="hero-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=420&q=80" alt="Image exemple">
+            <button class="main-btn" onclick="alert('Bienvenue sur mon site ! 😊')">Clique ici !</button>
         </section>
-        <section id="contact">
+        <section class="container" id="apropos">
+            <h2>À propos</h2>
+            <p>
+                Je m'appelle <strong>Revyn</strong> et je découvre le <span style="color:#4CAF50;">développement web</span>.<br>
+                Ici, tu pourras suivre mes premières créations et expériences !
+            </p>
+            <ul>
+                <li>Apprendre HTML &amp; CSS</li>
+                <li>Créer des pages modernes et responsives</li>
+                <li>Partager mes découvertes 😄</li>
+            </ul>
+        </section>
+        <section class="container" id="contact">
             <h2>Contact</h2>
-            <p>Vous pouvez me contacter par email : nonomrcs275@example.com</p>
+            <p>
+                Tu veux échanger ou donner ton avis&nbsp;? <br>
+                N’hésite pas à m’écrire :
+                <a class="contact-link" href="mailto:nonomrcs275@example.com">nonomrcs275@example.com</a>
+            </p>
         </section>
     </main>
     <footer>
-        &copy; 2026 Mon Premier Site
+        &copy; 2026 Mon Premier Site &nbsp;|&nbsp; Designé par <span style="color:#81ecb6;">Revyn</span>
     </footer>
 </body>
 </html>
-
-
-
