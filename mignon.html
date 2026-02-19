@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour toi 💖</title>
+<style>
+body{
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg,#ffb6d9,#ff4da6);
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    padding:40px 20px;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:30px;
+}
+
+button{
+    padding:15px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yes{
+    background:white;
+    color:#ff2e88;
+}
+
+#no{
+    background:#ff2e88;
+    color:white;
+}
+
+.hidden{
+    display:none;
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="screen1">
+    <h1>J’ai quelque chose à te dire… 💌</h1>
+    <button onclick="next1()">Je veux savoir 😳</button>
+</div>
+
+<div class="container hidden" id="screen2">
+    <h1>Tu es prête ? 😏</h1>
+    <button onclick="next2()">Oui 😌</button>
+</div>
+
+<div class="container hidden" id="screen3">
+    <h1>Veux-tu être la mere de mes enfants ? 💖</h1>
+    <button id="yes">OUI ❤️</button>
+    <button id="no">Non 😢</button>
+</div>
+
+<div class="container hidden" id="final">
+    <h1>Tu viens de rendre mon cœur le plus heureux du monde ❤️</h1>
+    <p>Je suis tellement chanceux de t’avoir 💕</p>
+</div>
+
+<script>
+function next1(){
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+}
+
+function next2(){
+    document.getElementById("screen2").classList.add("hidden");
+    document.getElementById("screen3").classList.remove("hidden");
+}
+
+document.getElementById("yes").addEventListener("click",()=>{
+    document.getElementById("screen3").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
+    createHearts();
+});
+
+document.getElementById("no").addEventListener("mouseover",()=>{
+    let x = Math.random()*80;
+    let y = Math.random()*80;
+    document.getElementById("no").style.position="absolute";
+    document.getElementById("no").style.left=x+"%";
+    document.getElementById("no").style.top=y+"%";
+});
+
+function createHearts(){
+    setInterval(()=>{
+        let heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"%";
+        heart.style.fontSize=(Math.random()*20+20)+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{heart.remove();},4000);
+    },300);
+}
+</script>
+
+</body>
+</html>
